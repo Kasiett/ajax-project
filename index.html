@@ -8,11 +8,39 @@
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet">
+  <link rel="icon" href="images/favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <body>
+  <div class="nav-bar">
+    <nav>
+      <a href="#">Home</a>
+      <a href="#">My Creations</a>
+    </nav>
+  </div>
   <header>
+    <h1>Generate AI image</h1>
   </header>
+  <form action="#">
+    <label for="image-description"></label>
+    <input name="image-description" id="image-description" placeholder="Visualize an extraordinary scene..." type="text" required>
+    <a class="create-btn" href="#">
+      create
+    </a>
+  </form>
   <main>
+    <ul>
+      <li class="giphy">
+        <!-- <iframe src="https://giphy.com/embed/vyHxl9Mpeq3Di" width="480" height="480" frameBorder="0" class="giphy-embed hidden"
+          allowFullScreen></iframe> -->
+      </li>
+
+    </ul>
   </main>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
