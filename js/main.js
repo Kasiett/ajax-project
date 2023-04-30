@@ -2,7 +2,7 @@
 // API request
 
 const apiUrl = 'https://api.openai.com/v1/images/generations';
-const chatgptKey = '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';
+const chatgptKey = '';
 
 function generateImg(newPrompt) {
   const xhr = new XMLHttpRequest();
@@ -10,7 +10,6 @@ function generateImg(newPrompt) {
   xhr.setRequestHeader('Content-Type', 'application/json');
   xhr.setRequestHeader('Authorization', `Bearer ${chatgptKey}`);
   xhr.onload = function () {
-
   };
   const payload = JSON.stringify({
     model: 'image-alpha-001',
@@ -21,13 +20,19 @@ function generateImg(newPrompt) {
   xhr.send(payload);
   xhr.responseType = 'json';
   xhr.addEventListener('load', function () {
-    const $response = xhr.response;
+    const res = xhr.response;
 
-    data.response.push($response);
+    const newData = {
+      id: data.nextEntryId++,
+      url: res.data[0].url,
+      description: newPrompt
+    };
+    data.entries.unshift(newData);
 
-    renderImage();
+    renderImage(newData);
+
     $iframe.setAttribute('class', 'hidden');
-
+    $form.reset();
   });
 }
 
@@ -35,26 +40,28 @@ const $form = document.querySelector('form');
 const $createBtn = document.querySelector('.create-btn');
 const $ul = document.querySelector('ul');
 const $iframe = document.querySelector('.giphy-embed');
-
+// const $listItem = document.querySelectorAll('.list-item');
 // Event listener for create btn
 
 $createBtn.addEventListener('click', function (event) {
   $iframe.setAttribute('class', 'giphy-embed');
   const newPrompt = $form.elements['image-description'].value;
+
   generateImg(newPrompt);
 
 });
 
-function renderImage() {
-  const newPrompt = $form.elements['image-description'].value;
-  const imgUrl = data.response[0].data[0].url;
+function renderImage(newImg) {
 
-  const list = document.createElement('li');
-  $ul.appendChild(list);
+  const listItem = document.createElement('li');
+  $ul.appendChild(listItem);
+
+  const newPrompt = newImg.description;
+  const imgUrl = newImg.url;
 
   const divImgWrapper = document.createElement('div');
   divImgWrapper.setAttribute('class', 'img-wrapper');
-  list.appendChild(divImgWrapper);
+  listItem.appendChild(divImgWrapper);
 
   const image = document.createElement('img');
   image.setAttribute('src', imgUrl);
@@ -62,9 +69,10 @@ function renderImage() {
 
   const divPiconWrapper = document.createElement('div');
   divPiconWrapper.setAttribute('class', 'p-icon-wrapper');
-  list.appendChild(divPiconWrapper);
+  listItem.appendChild(divPiconWrapper);
 
   const paragraph = document.createElement('p');
+  paragraph.setAttribute('class', 'paragraph');
   paragraph.textContent = newPrompt;
   divPiconWrapper.appendChild(paragraph);
 
@@ -83,21 +91,17 @@ function renderImage() {
   const iconHeart = document.createElement('i');
   iconHeart.setAttribute('class', 'fa-regular fa-heart fa-lg');
   iconWrapper.appendChild(iconHeart);
-
-  return list;
+  return listItem;
 
 }
+// renderImage();
 
-/* <li>
-  <div class="img-wrapper">
-    <img src="https://images.unsplash.com/photo-1681532639984-edb0790487d0?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1826&q=80">
-  </div>
-  <div class="p-icon-wrapper">
-    <p>some text</p>
-    <div class="icon-wrapper">
-      <i class="fa-regular fa-pen-to-square fa-lg"></i>
-      <i class="fa-regular fa-trash-can fa-lg"></i>
-      <i class="fa-regular fa-heart fa-lg"></i>
-    </div>
-  </div>
-</li> */
+document.addEventListener('DOMContentLoaded', function (e) {
+  for (let i = 0; i < data.entries.length; i++) {
+    renderImage(data.entries[i]);
+    // $ul.appendChild(newListItem);
+  }
+  // viewSwap(data.view);
+  // toggleNoEntries();
+
+});

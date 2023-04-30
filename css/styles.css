@@ -58,6 +58,7 @@ ul {
   display: flex;
   justify-content: center;
   flex-direction: column;
+  flex-wrap: wrap-reverse;
   align-items: center;
   list-style: none;
   margin: 0;
@@ -76,6 +77,27 @@ ul {
 
 .hidden {
   display: none;
+}
+
+iframe {
+  height: 150px;
+  margin: 0;
+}
+
+.icon-wrapper > i {
+  padding: 5px;
+  transition: 0.3s;
+}
+
+.icon-wrapper > i:hover {
+  font-size: x-large;
+}
+
+.paragraph {
+  width: 200px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 /*  styles for desktop  below */
@@ -146,7 +168,7 @@ ul {
 
   .icon-wrapper > i {
     padding: 5px;
-    transition: 0.5s;
+    transition: 0.3s;
   }
 
   .icon-wrapper > i:hover {
