@@ -99,9 +99,6 @@ function renderImage(newImg) {
 document.addEventListener('DOMContentLoaded', function (e) {
   for (let i = 0; i < data.entries.length; i++) {
     renderImage(data.entries[i]);
-    // $ul.appendChild(newListItem);
-  }
-  // viewSwap(data.view);
-  // toggleNoEntries();
 
+  }
 });
