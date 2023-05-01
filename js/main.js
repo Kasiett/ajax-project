@@ -2,7 +2,7 @@
 // API request
 
 const apiUrl = 'https://api.openai.com/v1/images/generations';
-const chatgptKey = '';
+const chatgptKey = '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';
 
 function generateImg(newPrompt) {
   const xhr = new XMLHttpRequest();
