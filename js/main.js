@@ -29,9 +29,10 @@ function generateImg(newPrompt) {
     };
     data.entries.unshift(newData);
 
-    renderImage(newData);
+    const renderNewImage = renderImage(newData);
+    $ul.prepend(renderNewImage);
 
-    $iframe.setAttribute('class', 'hidden');
+    $loadingAnimation.setAttribute('class', 'hidden');
     $form.reset();
   });
 }
@@ -39,12 +40,12 @@ function generateImg(newPrompt) {
 const $form = document.querySelector('form');
 const $createBtn = document.querySelector('.create-btn');
 const $ul = document.querySelector('ul');
-const $iframe = document.querySelector('.giphy-embed');
-// const $listItem = document.querySelectorAll('.list-item');
-// Event listener for create btn
+const $loadingAnimation = document.querySelector('.animation');
+
+// event listener for create btn
 
 $createBtn.addEventListener('click', function (event) {
-  $iframe.setAttribute('class', 'giphy-embed');
+  $loadingAnimation.setAttribute('class', 'animation');
   const newPrompt = $form.elements['image-description'].value;
 
   generateImg(newPrompt);
@@ -54,7 +55,7 @@ $createBtn.addEventListener('click', function (event) {
 function renderImage(newImg) {
 
   const listItem = document.createElement('li');
-  $ul.appendChild(listItem);
+  listItem.setAttribute('class', 'image-item');
 
   const newPrompt = newImg.description;
   const imgUrl = newImg.url;
@@ -94,11 +95,10 @@ function renderImage(newImg) {
   return listItem;
 
 }
-// renderImage();
 
 document.addEventListener('DOMContentLoaded', function (e) {
   for (let i = 0; i < data.entries.length; i++) {
-    renderImage(data.entries[i]);
-
+    const renderNewImage = renderImage(data.entries[i]);
+    $ul.appendChild(renderNewImage);
   }
 });
