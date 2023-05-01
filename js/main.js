@@ -2,13 +2,13 @@
 // API request
 
 const apiUrl = 'https://api.openai.com/v1/images/generations';
-const chatgptKey = '';
+const apiKey = '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';
 
 function generateImg(newPrompt) {
   const xhr = new XMLHttpRequest();
   xhr.open('POST', apiUrl, true);
   xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.setRequestHeader('Authorization', `Bearer ${chatgptKey}`);
+  xhr.setRequestHeader('Authorization', `Bearer ${apiKey}`);
   xhr.onload = function () {
   };
   const payload = JSON.stringify({
@@ -41,6 +41,7 @@ const $form = document.querySelector('form');
 const $createBtn = document.querySelector('.create-btn');
 const $ul = document.querySelector('ul');
 const $loadingAnimation = document.querySelector('.animation');
+// const $penIcon = document.querySelector('.fa-pen-to-square');
 
 // event listener for create btn
 
@@ -54,45 +55,45 @@ $createBtn.addEventListener('click', function (event) {
 
 function renderImage(newImg) {
 
-  const listItem = document.createElement('li');
-  listItem.setAttribute('class', 'image-item');
+  const $listItem = document.createElement('li');
+  $listItem.setAttribute('class', 'image-item');
 
   const newPrompt = newImg.description;
   const imgUrl = newImg.url;
 
-  const divImgWrapper = document.createElement('div');
-  divImgWrapper.setAttribute('class', 'img-wrapper');
-  listItem.appendChild(divImgWrapper);
+  const $divImgWrapper = document.createElement('div');
+  $divImgWrapper.setAttribute('class', 'img-wrapper');
+  $listItem.appendChild($divImgWrapper);
 
-  const image = document.createElement('img');
-  image.setAttribute('src', imgUrl);
-  divImgWrapper.appendChild(image);
+  const $image = document.createElement('img');
+  $image.setAttribute('src', imgUrl);
+  $divImgWrapper.appendChild($image);
 
-  const divPiconWrapper = document.createElement('div');
-  divPiconWrapper.setAttribute('class', 'p-icon-wrapper');
-  listItem.appendChild(divPiconWrapper);
+  const $divPiconWrapper = document.createElement('div');
+  $divPiconWrapper.setAttribute('class', 'p-icon-wrapper');
+  $listItem.appendChild($divPiconWrapper);
 
-  const paragraph = document.createElement('p');
-  paragraph.setAttribute('class', 'paragraph');
-  paragraph.textContent = newPrompt;
-  divPiconWrapper.appendChild(paragraph);
+  const $paragraph = document.createElement('p');
+  $paragraph.setAttribute('class', 'paragraph');
+  $paragraph.textContent = newPrompt;
+  $divPiconWrapper.appendChild($paragraph);
 
-  const iconWrapper = document.createElement('div');
-  iconWrapper.setAttribute('class', 'icon-wrapper');
-  divPiconWrapper.appendChild(iconWrapper);
+  const $iconWrapper = document.createElement('div');
+  $iconWrapper.setAttribute('class', 'icon-wrapper');
+  $divPiconWrapper.appendChild($iconWrapper);
 
-  const iconPen = document.createElement('i');
-  iconPen.setAttribute('class', 'fa-regular fa-pen-to-square fa-lg');
-  iconWrapper.appendChild(iconPen);
+  const $iconPen = document.createElement('i');
+  $iconPen.setAttribute('class', 'fa-regular fa-pen-to-square fa-lg');
+  $iconWrapper.appendChild($iconPen);
 
-  const iconTrash = document.createElement('i');
-  iconTrash.setAttribute('class', 'fa-regular fa-trash-can fa-lg');
-  iconWrapper.appendChild(iconTrash);
+  const $iconTrash = document.createElement('i');
+  $iconTrash.setAttribute('class', 'fa-regular fa-trash-can fa-lg');
+  $iconWrapper.appendChild($iconTrash);
 
-  const iconHeart = document.createElement('i');
-  iconHeart.setAttribute('class', 'fa-regular fa-heart fa-lg');
-  iconWrapper.appendChild(iconHeart);
-  return listItem;
+  const $iconHeart = document.createElement('i');
+  $iconHeart.setAttribute('class', 'fa-regular fa-heart fa-lg');
+  $iconWrapper.appendChild($iconHeart);
+  return $listItem;
 
 }
 
@@ -102,3 +103,9 @@ document.addEventListener('DOMContentLoaded', function (e) {
     $ul.appendChild(renderNewImage);
   }
 });
+
+// event listener for edit functionality below
+
+// $penIcon.addEventListener('click', function () {
+
+// });
