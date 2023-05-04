@@ -1,8 +1,8 @@
 /* exported data */
 let data = {
   nextEntryId: 1,
-  entries: []
-
+  entries: [],
+  editing: null
 };
 
 const storedImages = localStorage.getItem('storedImages');
