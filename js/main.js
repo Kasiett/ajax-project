@@ -2,7 +2,7 @@
 // API request
 
 const apiUrl = 'https://api.openai.com/v1/images/generations';
-const apiKey = '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'
+const apiKey = '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';
 
 function generateImg(newPrompt) {
   const xhr = new XMLHttpRequest();
@@ -23,7 +23,7 @@ function generateImg(newPrompt) {
     const res = xhr.response;
 
     const newData = {
-      id: data.nextEntryId++,
+      id: !data.editing ? data.nextEntryId++ : data.editing,
       url: res.data[0].url,
       description: newPrompt
     };
@@ -41,11 +41,30 @@ const $form = document.querySelector('form');
 const $createBtn = document.querySelector('.create-btn');
 const $ul = document.querySelector('ul');
 const $loadingAnimation = document.querySelector('.animation');
-// const $penIcon = document.querySelector('.fa-pen-to-square');
-
+const $imgDescription = document.querySelector('#image-description');
+// const $iconPen = document.querySelector('.fa-regular fa-pen-to-square fa-lg');
+// console.log('$iconPen>>', $iconPen);
 // event listener for create btn
 
 $createBtn.addEventListener('click', function (event) {
+  // console.log('data.editig>>', data.editing.length);
+  // console.log('data.editig>>', typeof data.editing);
+  if (data.editing !== null) {
+    for (let i = 0; i < data.entries.length; i++) {
+      // console.log('data.entries[i]>>', data.entries[i]);
+      if (data.editing === data.entries[i].id) {
+        data.entries.splice(i, 1);
+        const $listItem = document.querySelectorAll('[data-entry-id]');
+        $listItem[i].remove();
+        // for (i = 0; i < $listItem.length; i++) {
+        //   if (data.editing === $listItem[i].getAttribute('[data-entry-id]')) {
+        //   }
+        data.editing = null;
+        // }
+
+      }
+    }
+  }
   $loadingAnimation.setAttribute('class', 'animation');
   const newPrompt = $form.elements['image-description'].value;
 
@@ -57,6 +76,7 @@ function renderImage(newImg) {
 
   const $listItem = document.createElement('li');
   $listItem.setAttribute('class', 'image-item');
+  $listItem.setAttribute('data-entry-id', newImg.id);
 
   const newPrompt = newImg.description;
   const imgUrl = newImg.url;
@@ -93,6 +113,18 @@ function renderImage(newImg) {
   const $iconHeart = document.createElement('i');
   $iconHeart.setAttribute('class', 'fa-regular fa-heart fa-lg');
   $iconWrapper.appendChild($iconHeart);
+
+  // edit pen icon event
+  $iconPen.addEventListener('click', function (event) {
+    $imgDescription.value = newPrompt;
+    data.editing = newImg.id;
+  });
+
+  // delete trash icon event
+  // $iconTrash.addEventListener('click', function (event) {
+
+  // });
+
   return $listItem;
 
 }
