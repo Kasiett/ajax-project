@@ -2,7 +2,7 @@
 // API request
 
 const apiUrl = 'https://api.openai.com/v1/images/generations';
-const apiKey = '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';
+const apiKey = '';
 
 function generateImg(newPrompt) {
   const xhr = new XMLHttpRequest();
@@ -42,25 +42,20 @@ const $createBtn = document.querySelector('.create-btn');
 const $ul = document.querySelector('ul');
 const $loadingAnimation = document.querySelector('.animation');
 const $imgDescription = document.querySelector('#image-description');
-// const $iconPen = document.querySelector('.fa-regular fa-pen-to-square fa-lg');
-// console.log('$iconPen>>', $iconPen);
-// event listener for create btn
+const $divModal = document.querySelector('#modal');
+const $cancelBtn = document.querySelector('.cancel-btn');
+const $confirmBtn = document.querySelector('.confirm-btn');
+const $myCreations = document.querySelector('.my-creations');
 
 $createBtn.addEventListener('click', function (event) {
-  // console.log('data.editig>>', data.editing.length);
-  // console.log('data.editig>>', typeof data.editing);
+
   if (data.editing !== null) {
     for (let i = 0; i < data.entries.length; i++) {
-      // console.log('data.entries[i]>>', data.entries[i]);
       if (data.editing === data.entries[i].id) {
         data.entries.splice(i, 1);
         const $listItem = document.querySelectorAll('[data-entry-id]');
         $listItem[i].remove();
-        // for (i = 0; i < $listItem.length; i++) {
-        //   if (data.editing === $listItem[i].getAttribute('[data-entry-id]')) {
-        //   }
         data.editing = null;
-        // }
 
       }
     }
@@ -121,13 +116,37 @@ function renderImage(newImg) {
   });
 
   // delete trash icon event
-  // $iconTrash.addEventListener('click', function (event) {
-
-  // });
+  $iconTrash.addEventListener('click', function (event) {
+    $divModal.setAttribute('class', 'modal');
+    data.editing = newImg.id;
+  });
 
   return $listItem;
 
 }
+
+// event for cancel delete btn
+$cancelBtn.addEventListener('click', function (event) {
+  $divModal.setAttribute('class', 'hidden');
+  data.editing = null;
+});
+
+// event for confirm delete btn
+$confirmBtn.addEventListener('click', function (event) {
+  if (data.editing !== null) {
+    for (let i = 0; i < data.entries.length; i++) {
+      if (data.editing === data.entries[i].id) {
+        data.entries.splice(i, 1);
+        const $listItem = document.querySelectorAll('[data-entry-id]');
+        $listItem[i].remove();
+        data.editing = null;
+        $divModal.setAttribute('class', 'hidden');
+
+      }
+    }
+  }
+
+});
 
 document.addEventListener('DOMContentLoaded', function (e) {
   for (let i = 0; i < data.entries.length; i++) {
@@ -136,8 +155,8 @@ document.addEventListener('DOMContentLoaded', function (e) {
   }
 });
 
-// event listener for edit functionality below
+// event for  My creations
 
-// $penIcon.addEventListener('click', function () {
+$myCreations.addEventListener('click', function (event) {
 
-// });
+});
