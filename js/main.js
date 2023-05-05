@@ -45,6 +45,7 @@ const $imgDescription = document.querySelector('#image-description');
 const $divModal = document.querySelector('#modal');
 const $cancelBtn = document.querySelector('.cancel-btn');
 const $confirmBtn = document.querySelector('.confirm-btn');
+const $myCreations = document.querySelector('.my-creations');
 
 $createBtn.addEventListener('click', function (event) {
 
@@ -152,4 +153,10 @@ document.addEventListener('DOMContentLoaded', function (e) {
     const renderNewImage = renderImage(data.entries[i]);
     $ul.appendChild(renderNewImage);
   }
+});
+
+// event for  My creations
+
+$myCreations.addEventListener('click', function (event) {
+
 });
