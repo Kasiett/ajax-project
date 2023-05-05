@@ -2,7 +2,7 @@
 // API request
 
 const apiUrl = 'https://api.openai.com/v1/images/generations';
-const apiKey = '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';
+const apiKey = '';
 
 function generateImg(newPrompt) {
   const xhr = new XMLHttpRequest();
