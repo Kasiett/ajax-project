@@ -171,6 +171,64 @@ body {
   }
 }
 
+/* styles for modal page */
+
+.modal {
+  position: fixed;
+  background-color: rgba(0, 0, 0, 0.529);
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.box {
+  border: 1px solid black;
+  width: 500px;
+  height: 30vh;
+  border-radius: 5px;
+  background-color: white;
+}
+
+.row-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50%;
+}
+
+.cancel-btn,
+.confirm-btn {
+  text-align: center;
+  margin: 15px;
+  padding: 7px 10px;
+  border-radius: 5px;
+  border: transparent;
+}
+
+.cancel-btn {
+  background-color: rgb(140, 177, 27);
+}
+
+.cancel-btn:hover {
+  background-color: rgb(120, 158, 6);
+}
+
+.confirm-btn {
+  background-color: #e93d5f;
+}
+
+.confirm-btn:hover {
+  background-color: #e9113c;
+}
+
+.visibility-hidden {
+  visibility: hidden;
+}
+
 /*  styles for desktop  below */
 
 @media screen and (min-width: 768px) {
